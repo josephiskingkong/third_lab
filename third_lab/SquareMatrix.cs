@@ -367,29 +367,29 @@ class SquareMatrix
                     {
                         if (MinorRow < RowIndex)
                         {
-                            for (int MinorColumn = 0; MinorColumn < Size - 1; ++MinorColumn)
+                            for (int MinorCoumn = 0; MinorCoumn < Size - 1; ++MinorCoumn)
                             {
-                                if (MinorColumn < ColumnIndex)
+                                if (MinorCoumn < ColumnIndex)
                                 {
-                                    Minor.Matrix[MinorRow, MinorColumn] = Matrix[MinorRow, MinorColumn];
+                                    Minor.Matrix[MinorRow, MinorCoumn] = Matrix[MinorRow, MinorCoumn];
                                 }
                                 else
                                 {
-                                    Minor.Matrix[MinorRow, MinorColumn] = Matrix[MinorRow, MinorColumn + 1];
+                                    Minor.Matrix[MinorRow, MinorCoumn] = Matrix[MinorRow, MinorCoumn + 1];
                                 }
                             }
                         }
                         else
                         {
-                            for (int NewCol = 0; NewCol < Size - 1; ++NewCol)
+                            for (int MinorColumn = 0; MinorColumn < Size - 1; ++MinorColumn)
                             {
-                                if (NewCol < ColumnIndex)
+                                if (MinorColumn < ColumnIndex)
                                 {
-                                    Minor.Matrix[MinorRow, NewCol] = Matrix[MinorRow + 1, NewCol];
+                                    Minor.Matrix[MinorRow, MinorColumn] = Matrix[MinorRow + 1, MinorColumn];
                                 }
                                 else
                                 {
-                                    Minor.Matrix[MinorRow, NewCol] = Matrix[MinorRow + 1, NewCol + 1];
+                                    Minor.Matrix[MinorRow, MinorColumn] = Matrix[MinorRow + 1, MinorColumn + 1];
                                 }
                             }
                         }
