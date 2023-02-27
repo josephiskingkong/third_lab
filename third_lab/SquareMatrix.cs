@@ -41,22 +41,6 @@ class SquareMatrix
         }
     }
 
-    public static SquareMatrix RandomMatrix(int size, double min, double max)
-    {
-        var random = new Random();
-        var matrix = new SquareMatrix(size);
-
-        for (int row = 0; row < size; row++)
-        {
-            for (int col = 0; col < size; col++)
-            {
-                matrix[row, col] = (int)(min + (max - min) * random.NextDouble());
-            }
-        }
-
-        return matrix;
-    }
-
     public SquareMatrix(int[,] matrix)
     {
         size = matrix.GetLength(0);
@@ -374,16 +358,16 @@ class SquareMatrix
         else
         {
             int sign = 1;
-            for (int row = 0; row < size; row++)
+            for (int row = 0; row < size; ++row)
             {
-                for (int col = 0; col < size; col++)
+                for (int col = 0; col < size; ++col)
                 {
                     SquareMatrix minor = new SquareMatrix(size - 1);
-                    for (int NewRow = 0; NewRow < size; NewRow++)
+                    for (int NewRow = 0; NewRow < size; ++NewRow)
                     {
                         if (NewRow != row)
                         {
-                            for (int NewCol = 1; NewCol < size; NewCol++)
+                            for (int NewCol = 1; NewCol < size; ++NewCol)
                             {
                                 if (NewCol < col)
                                 {
