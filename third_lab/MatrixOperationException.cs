@@ -3,7 +3,7 @@ namespace third_lab;
 
 class MatrixOperationException : Exception
 {
-    public MatrixOperationException(string message) : base(message)
+    public MatrixOperationException(string Message) : base(Message)
     {
     }
 }
