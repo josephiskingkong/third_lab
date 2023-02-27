@@ -8,10 +8,10 @@ class Program
     {
         try
         {
-            SquareMatrix a = new SquareMatrix(3, 1, 10);
+            SquareMatrix a = new SquareMatrix(4, 1, 100);
             Console.WriteLine("Matrix A:\n" + a.ToString());
 
-            SquareMatrix b = new SquareMatrix(3, 1, 10);
+            SquareMatrix b = new SquareMatrix(4, 1, 100);
             Console.WriteLine("Matrix B:\n" + b.ToString());
 
             SquareMatrix c = a + b;
@@ -39,7 +39,7 @@ class Program
             Console.WriteLine("A <= B: " + lessOrEqual);
 
             SquareMatrix e = (SquareMatrix)a.DeepCopy();
-            Console.WriteLine("Matrix E (deep copy of A):\n" + e.ToString());
+            Console.WriteLine("\nMatrix E (deep copy of A):\n" + e.ToString());
 
             double determinantA = a.Determinant();
             Console.WriteLine("Determinant of A: " + determinantA);

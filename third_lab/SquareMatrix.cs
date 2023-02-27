@@ -7,7 +7,7 @@ namespace third_lab;
 class SquareMatrix
 {
 
-    public int this[int row, int col]
+    public double this[int row, int col]
     {
         get
         {
@@ -19,18 +19,18 @@ class SquareMatrix
         }
     }
     private int size;
-    private int[,] matrix;
+    private double[,] matrix;
 
     public SquareMatrix(int size)
     {
         this.size = size;
-        matrix = new int[size, size];
+        matrix = new double[size, size];
     }
 
     public SquareMatrix(int size, int minValue, int maxValue)
     {
         this.size = size;
-        matrix = new int[size, size];
+        matrix = new double[size, size];
         Random random = new Random();
         for (int row = 0; row < size; row++)
         {
@@ -44,7 +44,7 @@ class SquareMatrix
     public SquareMatrix(int[,] matrix)
     {
         size = matrix.GetLength(0);
-        this.matrix = new int[size, size];
+        this.matrix = new double[size, size];
         for (int row = 0; row < size; row++)
         {
             for (int col = 0; col < size; col++)
@@ -84,7 +84,7 @@ class SquareMatrix
         {
             for (int col = 0; col < result.size; col++)
             {
-                int sum = 0;
+                double sum = 0;
                 for (int k = 0; k < result.size; k++)
                 {
                     sum += matrix1.matrix[row, k] * matrix2.matrix[k, col];
@@ -200,7 +200,7 @@ class SquareMatrix
         return !(matrix1 == matrix2);
     }
 
-    public static explicit operator int(SquareMatrix matrix)
+    public static explicit operator double(SquareMatrix matrix)
     {
         if (matrix.size != 1)
         {
@@ -363,24 +363,38 @@ class SquareMatrix
                 for (int col = 0; col < size; ++col)
                 {
                     SquareMatrix minor = new SquareMatrix(size - 1);
-                    for (int NewRow = 0; NewRow < size; ++NewRow)
+                    for (int newRow = 0; newRow < size - 1; ++newRow)
                     {
-                        if (NewRow != row)
+                        if (newRow < row)
                         {
-                            for (int NewCol = 1; NewCol < size; ++NewCol)
+                            for (int newCol = 0; newCol < size - 1; ++newCol)
+                            {
+                                if (newCol < col)
+                                {
+                                    minor.matrix[newRow, newCol] = matrix[newRow, newCol];
+                                }
+                                else
+                                {
+                                    minor.matrix[newRow, newCol] = matrix[newRow, newCol + 1];
+                                }
+                            }
+                        }
+                        else
+                        {
+                            for (int NewCol = 0; NewCol < size - 1; ++NewCol)
                             {
                                 if (NewCol < col)
                                 {
-                                    minor.matrix[NewRow < row ? NewRow : NewRow - 1, NewCol - 1] = matrix[NewRow, NewCol];
+                                    minor.matrix[newRow, NewCol] = matrix[newRow + 1, NewCol];
                                 }
-                                else if (NewCol > col)
+                                else
                                 {
-                                    minor.matrix[NewRow < row ? NewRow : NewRow - 1, NewCol - 2] = matrix[NewRow, NewCol];
+                                    minor.matrix[newRow, NewCol] = matrix[newRow + 1, NewCol + 1];
                                 }
                             }
                         }
                     }
-                    result.matrix[col, row] = (int)(sign * minor.Determinant() / determinant);
+                    result.matrix[row, col] = sign * minor.Determinant() / determinant;
                     sign = -sign;
                 }
                 if (size % 2 == 0)
@@ -391,4 +405,5 @@ class SquareMatrix
         }
         return result;
     }
+
 }
