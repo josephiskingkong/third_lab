@@ -8,47 +8,47 @@ class Program
     {
         try
         {
-            SquareMatrix a = new SquareMatrix(4, 1, 100);
-            Console.WriteLine("Matrix A:\n" + a.ToString());
+            SquareMatrix MatrixA = new SquareMatrix(4, 1, 100);
+            Console.WriteLine("Matrix A:\n" + MatrixA.ToString());
 
-            SquareMatrix b = new SquareMatrix(4, 1, 100);
-            Console.WriteLine("Matrix B:\n" + b.ToString());
+            SquareMatrix MatrixB = new SquareMatrix(4, 1, 100);
+            Console.WriteLine("Matrix B:\n" + MatrixB.ToString());
 
-            SquareMatrix c = a + b;
-            Console.WriteLine("Matrix C = A + B:\n" + c.ToString());
+            SquareMatrix MatrixC = MatrixA + MatrixB;
+            Console.WriteLine("Matrix C = A + B:\n" + MatrixC.ToString());
 
-            SquareMatrix d = a * b;
-            Console.WriteLine("Matrix D = A * B:\n" + d.ToString());
+            SquareMatrix MatrixD = MatrixA * MatrixB;
+            Console.WriteLine("Matrix D = A * B:\n" + MatrixD.ToString());
 
-            bool equal = (a == b);
-            Console.WriteLine("A == B: " + equal);
+            bool Equal = (MatrixA == MatrixB);
+            Console.WriteLine("A == B: " + Equal);
 
-            bool notEqual = (a != b);
-            Console.WriteLine("A != B: " + notEqual);
+            bool NotEqual = (MatrixA != MatrixB);
+            Console.WriteLine("A != B: " + NotEqual);
 
-            bool greaterThan = (a > b);
-            Console.WriteLine("A > B: " + greaterThan);
+            bool GreaterThan = (MatrixA > MatrixB);
+            Console.WriteLine("A > B: " + GreaterThan);
 
-            bool lessThan = (a < b);
-            Console.WriteLine("A < B: " + lessThan);
+            bool LessThan = (MatrixA < MatrixB);
+            Console.WriteLine("A < B: " + LessThan);
 
-            bool greaterOrEqual = (a >= b);
-            Console.WriteLine("A >= B: " + greaterOrEqual);
+            bool GreaterOrEqual = (MatrixA >= MatrixB);
+            Console.WriteLine("A >= B: " + GreaterOrEqual);
 
-            bool lessOrEqual = (a <= b);
-            Console.WriteLine("A <= B: " + lessOrEqual);
+            bool LessOrEqual = (MatrixA <= MatrixB);
+            Console.WriteLine("A <= B: " + LessOrEqual);
 
-            SquareMatrix e = (SquareMatrix)a.DeepCopy();
-            Console.WriteLine("\nMatrix E (deep copy of A):\n" + e.ToString());
+            SquareMatrix MatrixE = (SquareMatrix)MatrixA.DeepCopy();
+            Console.WriteLine("\nMatrix E (deep copy of A):\n" + MatrixA.ToString());
 
-            double determinantA = a.Determinant();
-            Console.WriteLine("Determinant of A: " + determinantA);
+            double DeterminantA = MatrixA.Determinant();
+            Console.WriteLine("Determinant of A: " + DeterminantA);
 
-            SquareMatrix inverseA = a.Inverse();
-            Console.WriteLine("Inverse of A:\n" + inverseA.ToString());
+            SquareMatrix InverseMatrixA = MatrixA.Inverse();
+            Console.WriteLine("Inverse of A:\n" + InverseMatrixA.ToString());
 
-            double determinantInverseA = inverseA.Determinant();
-            Console.WriteLine("Determinant of inverse of A: " + determinantInverseA);
+            double DeterminantInverseA = InverseMatrixA.Determinant();
+            Console.WriteLine("Determinant of inverse of A: " + DeterminantInverseA);
         }
         catch (MatrixOperationException e)
         {
