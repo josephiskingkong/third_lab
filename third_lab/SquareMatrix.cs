@@ -18,8 +18,8 @@ class SquareMatrix
             Matrix[RowIndex, ColumnIndex] = value;
         }
     }
-    private int Size;
-    private double[,] Matrix;
+    public int Size;
+    public double[,] Matrix;
 
     public SquareMatrix(int Size)
     {
@@ -239,14 +239,14 @@ class SquareMatrix
         return Result;
     }
 
-    public int CompareTo(object Obj)
+    public int CompareTo(object? Obj)
     {
         if (Obj == null)
         {
             return 1;
         }
 
-        SquareMatrix OtherMatrix = Obj as SquareMatrix;
+        SquareMatrix? OtherMatrix = Obj as SquareMatrix;
         if (OtherMatrix != null)
         {
             if (this > OtherMatrix)
@@ -268,7 +268,7 @@ class SquareMatrix
         }
     }
 
-    public override bool Equals(object Obj)
+    public override bool Equals(object? Obj)
     {
         if (Obj == null || !(Obj is SquareMatrix))
         {
@@ -357,7 +357,6 @@ class SquareMatrix
         }
         else
         {
-            int Sign = 1;
             for (int RowIndex = 0; RowIndex < Size; ++RowIndex)
             {
                 for (int ColumnIndex = 0; ColumnIndex < Size; ++ColumnIndex)
@@ -365,45 +364,19 @@ class SquareMatrix
                     SquareMatrix Minor = new SquareMatrix(Size - 1);
                     for (int MinorRow = 0; MinorRow < Size - 1; ++MinorRow)
                     {
-                        if (MinorRow < RowIndex)
+                        for (int MinorColumn = 0; MinorColumn < Size - 1; ++MinorColumn)
                         {
-                            for (int MinorCoumn = 0; MinorCoumn < Size - 1; ++MinorCoumn)
-                            {
-                                if (MinorCoumn < ColumnIndex)
-                                {
-                                    Minor.Matrix[MinorRow, MinorCoumn] = Matrix[MinorRow, MinorCoumn];
-                                }
-                                else
-                                {
-                                    Minor.Matrix[MinorRow, MinorCoumn] = Matrix[MinorRow, MinorCoumn + 1];
-                                }
-                            }
-                        }
-                        else
-                        {
-                            for (int MinorColumn = 0; MinorColumn < Size - 1; ++MinorColumn)
-                            {
-                                if (MinorColumn < ColumnIndex)
-                                {
-                                    Minor.Matrix[MinorRow, MinorColumn] = Matrix[MinorRow + 1, MinorColumn];
-                                }
-                                else
-                                {
-                                    Minor.Matrix[MinorRow, MinorColumn] = Matrix[MinorRow + 1, MinorColumn + 1];
-                                }
-                            }
+                            int RowOffset = MinorRow >= RowIndex ? 1 : 0;
+                            int ColumnOffset = MinorColumn >= ColumnIndex ? 1 : 0;
+                            Minor.Matrix[MinorRow, MinorColumn] = Matrix[MinorRow + RowOffset, MinorColumn + ColumnOffset];
                         }
                     }
-                    Result.Matrix[RowIndex, ColumnIndex] = Sign * Minor.Determinant() / Determinant;
-                    Sign = -Sign;
-                }
-                if (Size % 2 == 0)
-                {
-                    Sign = -Sign;
+                    Result.Matrix[ColumnIndex, RowIndex] = ((RowIndex + ColumnIndex) % 2 == 0 ? 1 : -1) * Minor.Determinant() / Determinant;
                 }
             }
         }
         return Result;
     }
+
 
 }

@@ -4,7 +4,7 @@ namespace third_lab;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Print(string[] args)
     {
         try
         {
